@@ -9,11 +9,14 @@ def todolistView(request):
 
 
 def addTodoView(request):
-    x = request.POST['content']
-    new_item = ToDoListItem(content=x)
-    new_item.save()
-    return HttpResponseRedirect('/todolistapp/')
 
+    x = request.POST['content']
+    if len(x) != 0:
+        new_item = ToDoListItem(content=x)
+        new_item.save()
+        return HttpResponseRedirect('/todolistapp/')
+    else:
+        return HttpResponseRedirect('/todolistapp/')
 
 def deleteTodoView(request, i):
     y = ToDoListItem.objects.get(id=i)
