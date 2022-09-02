@@ -22,4 +22,5 @@ urlpatterns = [
     path('todolistapp/', todolistView),
     path('addTodoItem/', addTodoView),
     path('deleteTodoItem/<int:i>/', deleteTodoView),
+    path('', todolistView),
 ]
