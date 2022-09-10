@@ -23,7 +23,7 @@
         </div>
 
         <form action="/deleteTodoItem/{{task.id}}/" method = "post">{% csrf_token %}
-            <input type="submit" value="Delete">
+            <input type="submit" value="Done">
         </form>
     </div>
     {% empty %}
@@ -83,7 +83,7 @@
         border:0 none;
         cursor:pointer;
         -webkit-border-radius: 5px;
-        border-radius: 5px;
+        border-radius: 10px;
     }
 
 </style>
