@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 #class Category(models.Model):
@@ -9,6 +10,7 @@ from django.db import models
 
 
 class ToDoListItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(default=False)

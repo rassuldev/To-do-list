@@ -1,15 +1,23 @@
-<h1>My To Do List</h1>
+
+
+{% if request.user.is_authenticated %}
+<p>Hello, {{request.user}}</p>
+<a href ="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}">Login</a> 
+{% endif %}
+<head>
+    <h1>My To Do List</h1>
+</head>
+
 
 <form action="/addTodoItem/" method = "post">{% csrf_token %}
     <input type="text" name="content">
     <input type="submit" value="Add Todo Item">
 </form>
 
-
-
-
 <div id="tasklist" class="task-items-wrapper">
-    {% for task in all_items %}
+    {% for task in tasks %}
     <div class="task-wrapper" data-position="{{task.id}}">
         <div class="task-title">
             {% if task.completed %}
@@ -29,12 +37,19 @@
     {% empty %}
     <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
         <h3>No new tasks are created.</h3>
-        <h3>Create a <a style="text-decoration: none; color: #e53935;" href="{% url 'task-create' %}">New task</a> ! </h3>
+
     </div>
     {% endfor %}
 </div>
 
 <style>
+    div {
+        display: block;
+    }
+    .task-title{
+        display: flex;  
+    }
+
     h1 {
             display: block;
             font-size: 2em;
@@ -45,13 +60,32 @@
             font-weight: bold;
             text-align: center;
     }
+
     .task-wrapper {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-around;
             background-color: #fff;
             border-top: 1px solid #dfe4ea;
             overflow: hidden;
+        }
+    
+    .task-title {
+            display: flex;
+            padding: 20px;
+        }
+    i {
+            display: flex;
+            text-decoration: none;
+            color: #4b5156;
+            margin-left: 10px;
+    }
+
+    .task-controls {
+            display: flex;
+            text-decoration: none;
+            color: #4b5156;
+            margin-left: 10px;
         }
     .task-complete-icon {
             height: 20px;
@@ -71,6 +105,7 @@
         border:2px solid #ccc;
         -webkit-border-radius: 5px;
         border-radius: 10px;
+        align-items: center;
     }
 
     input[type=text]:focus {
@@ -85,5 +120,6 @@
         -webkit-border-radius: 5px;
         border-radius: 10px;
     }
+    
 
 </style>
