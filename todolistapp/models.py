@@ -19,4 +19,4 @@ class ToDoListItem(models.Model):
     def __str__(self):
         return self.content
     class Meta:
-        ordering = ['completed']
+        ordering = ['-created']
